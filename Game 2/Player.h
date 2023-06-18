@@ -11,13 +11,20 @@ class Player
 private:
     sf::RectangleShape shape;
 
+    float movementSpeed;
+    int hp;
+    int hpMax;
+
     void initVariables();
     void initShape();
 
 public:
-    Player();
+    Player(float x = 0.f, float y = 0.f);
     virtual ~Player();
 
-    void update();
+    const sf::RectangleShape getShape() const;
+    void updateInput();
+    void updateWindowsBoundsCollision(const sf::RenderTarget* target);
+    void update(const sf::RenderTarget* target);
     void render(sf::RenderTarget* target);
 };

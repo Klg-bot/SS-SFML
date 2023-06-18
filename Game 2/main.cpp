@@ -3,7 +3,7 @@
 int main()
 {
     //Initialise random seed
-    srand(static_cast<unsigned>(NULL));
+    srand(static_cast<unsigned>(time(NULL)));
 
     //Initialise game object
     Game game;

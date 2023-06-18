@@ -3,9 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
-#include <sstream>
 
 #include "Player.h"
+#include "Balls.h"
 
 class Game
 {
@@ -16,6 +16,11 @@ private:
     sf::Event sfmlEvent;
 
     Player player;
+
+    std::vector<Balls> balls;
+    float spawnTimerMax;
+    float spawnTimer;
+    int maxBalls;
 
     void initVariable();
     void initWindow();
@@ -33,6 +38,8 @@ public:
     const bool running() const;
     void pollEvents();
 
+    void spawnBalls();
+    void updateCollision();
     void update();
     void render();
 

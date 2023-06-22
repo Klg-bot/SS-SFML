@@ -15,6 +15,7 @@ private:
     int hp;
     int hpMax;
 
+
     void initVariables();
     void initShape();
 
@@ -22,7 +23,15 @@ public:
     Player(float x = 0.f, float y = 0.f);
     virtual ~Player();
 
+    //Accesors
     const sf::RectangleShape getShape() const;
+    const int& getHp() const;
+    const int& getHpMax() const;
+
+    //Functions
+    void takeDamage(const int damage);
+    void gainHealth(const int health);
+
     void updateInput();
     void updateWindowsBoundsCollision(const sf::RenderTarget* target);
     void update(const sf::RenderTarget* target);

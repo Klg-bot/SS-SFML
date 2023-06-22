@@ -7,6 +7,7 @@ void Game::initVariable()
     this->spawnTimerMax = 10.f;
     this->spawnTimer = this->spawnTimerMax;
     this->maxBalls = 10;
+    this->points = 0;
 }
 
 void Game::initWindow()
@@ -17,17 +18,50 @@ void Game::initWindow()
 
 }
 
+void Game::initFonts()
+{
+    if (this->font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
+    {
+        std::cout << "Could not load fonts" << "\n";
+    }
+}
+
+void Game::initText()
+{
+    //Gui init
+    this->guiText.setFont(this->font);
+    this->guiText.setFillColor(sf::Color::White);
+    this->guiText.setCharacterSize(24);
+
+    //End game text init
+    this->endGameText.setFont(this->font);
+    this->endGameText.setFillColor(sf::Color::Red);
+    this->endGameText.setCharacterSize(60);
+    this->endGameText.setStyle(sf::Text::Bold);
+    this->endGameText.setPosition(400.f, 300.f);
+    this->endGameText.setString("YOU ARE DEAD");
+  
+}
+
 // Constructors & Destructors
 Game::Game()
 {
     this->initVariable();
-    this->initWindow(); 
+    this->initWindow();
+    this->initFonts();
+    this->initText();
 }
 
 Game::~Game()
 {
     delete this->window;
 }
+
+const bool Game::getEndGame() const
+{
+    return this->endGame;
+}
+
 
 // Functions
 const bool Game::running() const
@@ -55,6 +89,19 @@ void Game::pollEvents()
     }
 }
 
+const int Game::randBallType() const
+{
+    int type = BallTypes::DEFAULT;
+    int randValue = rand() % 101 + 1;
+
+    if (50 < randValue <= 60)
+        type = BallTypes::DAMAGING;
+    else if (60 < randValue <= 100)
+        type = BallTypes::HEALING;
+
+    return type;
+}
+
 void Game::spawnBalls()
 {
     //Timer
@@ -66,40 +113,88 @@ void Game::spawnBalls()
     {
         if (this->balls.size() < this->maxBalls)
         {
-            this->balls.push_back(Balls(*this->window));
+            this->balls.push_back(Balls(*this->window, rand()%BallTypes::NROTYPES));
 
             this->spawnTimer = 0.f;
         }
     }
 }
 
+void Game::updatePlayer()
+{
+    this->player.update(this->window);
+
+    if (this->player.getHp() <= 0)
+        this->endGame = true;
+
+}
+
 void Game::updateCollision()
 {
     //Check the collision
 
-    for (auto i : this->balls)
+    for (size_t i = 0; i < this->balls.size(); i++)
     {
-        if(this->player.getShape().getGlobalBounds().intersects(i.get)
-    }
-    //Im trying my own for loop
-    //TODO: add getShapes for Balls class
+        if (this->player.getShape().getGlobalBounds().intersects(this->balls[i].getShape().getGlobalBounds()))
+        {
+            switch (this->balls[i].getType())
+            {
+            case BallTypes::DEFAULT:
+                this->points++;
+                break;
+            case BallTypes::DAMAGING:
+                this->player.takeDamage(9);
+                break;
+            case BallTypes::HEALING:
+                this->player.gainHealth(1);
+                break;
+            }
 
+            //Add points
+            this->points++;
+
+            //Remove the ball
+            this->balls.erase(this->balls.begin() + i);
+        }
+    }
+
+}
+
+void Game::updateGui()
+{
+    std::stringstream ss;
+    
+    ss << "     " << this->points << "     Points" << "\n"
+        << "     " << this->player.getHp() << " / " << this->player.getHpMax() << "     Health" << "\n";
+
+    this->guiText.setString(ss.str());
 }
 
 void Game::update()
 {
     this->pollEvents();
 
-    this->player.update(this->window);
-
+    if (!this->endGame)
+    {
+    this->updatePlayer();
+    this->randBallType();
     this->spawnBalls();
+    this->updateCollision();
+    this->updateGui();
+
+    }
 
     //Output testing
 
     /*std::cout << rand() % this->window->getSize().x << std::endl;*/
 
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->window);
-    std::cout << "Mouse X: " << mousePosition.x << ", Mouse Y: " << mousePosition.y << std::endl;
+    //sf::Vector2i mousePosition = sf::Mouse::getPosition(*this->window);
+    //std::cout << "Mouse X: " << mousePosition.x << ", Mouse Y: " << mousePosition.y << std::endl;
+}
+
+void Game::renderGui(sf::RenderTarget* target)
+{
+    target->draw(this->guiText);
 }
 
 void Game::render()
@@ -112,6 +207,16 @@ void Game::render()
     for (auto i : this->balls)
     {
         i.render(*this->window);
+    }
+
+    //Render gui
+    this->renderGui(this->window);
+
+
+    //Render end text
+    if (this->endGame)
+    {
+        this->window->draw(this->endGameText);
     }
 
     this->window->display();

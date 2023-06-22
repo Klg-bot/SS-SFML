@@ -77,10 +77,10 @@ void Game::updateCollision()
 {
     //Check the collision
 
-    for (auto i : this->balls)
-    {
-        if(this->player.getShape().getGlobalBounds().intersects(i.get)
-    }
+    // for (auto i : this->balls)
+    // {
+    //     if(this->player.getShape().getGlobalBounds().intersects(i.get)
+    // }
     //Im trying my own for loop
     //TODO: add getShapes for Balls class
 

@@ -11,12 +11,12 @@
 },
 {
   "directory": "/Users/yaohan/vscode/SFML GAMES/Game 2/build",
-  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/sfml/2.5.1_2/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/Game2.dir/Player.cpp.o -c \"/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp\"",
-  "file": "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp"
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/sfml/2.5.1_2/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/Game2.dir/Game.cpp.o -c \"/Users/yaohan/vscode/SFML GAMES/Game 2/Game.cpp\"",
+  "file": "/Users/yaohan/vscode/SFML GAMES/Game 2/Game.cpp"
 },
 {
   "directory": "/Users/yaohan/vscode/SFML GAMES/Game 2/build",
-  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/sfml/2.5.1_2/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/Game2.dir/Game.cpp.o -c \"/Users/yaohan/vscode/SFML GAMES/Game 2/Game.cpp\"",
-  "file": "/Users/yaohan/vscode/SFML GAMES/Game 2/Game.cpp"
+  "command": "/usr/bin/clang++  -isystem /opt/homebrew/Cellar/sfml/2.5.1_2/include -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -o CMakeFiles/Game2.dir/Player.cpp.o -c \"/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp\"",
+  "file": "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp"
 }
 ]

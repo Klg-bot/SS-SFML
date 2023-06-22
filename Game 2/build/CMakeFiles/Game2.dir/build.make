@@ -97,24 +97,10 @@ CMakeFiles/Game2.dir/Balls.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Game2.dir/Balls.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/yaohan/vscode/SFML GAMES/Game 2/Balls.cpp" -o CMakeFiles/Game2.dir/Balls.cpp.s
 
-CMakeFiles/Game2.dir/Player.cpp.o: CMakeFiles/Game2.dir/flags.make
-CMakeFiles/Game2.dir/Player.cpp.o: /Users/yaohan/vscode/SFML\ GAMES/Game\ 2/Player.cpp
-CMakeFiles/Game2.dir/Player.cpp.o: CMakeFiles/Game2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/yaohan/vscode/SFML GAMES/Game 2/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Game2.dir/Player.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Game2.dir/Player.cpp.o -MF CMakeFiles/Game2.dir/Player.cpp.o.d -o CMakeFiles/Game2.dir/Player.cpp.o -c "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp"
-
-CMakeFiles/Game2.dir/Player.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Game2.dir/Player.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp" > CMakeFiles/Game2.dir/Player.cpp.i
-
-CMakeFiles/Game2.dir/Player.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Game2.dir/Player.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp" -o CMakeFiles/Game2.dir/Player.cpp.s
-
 CMakeFiles/Game2.dir/Game.cpp.o: CMakeFiles/Game2.dir/flags.make
 CMakeFiles/Game2.dir/Game.cpp.o: /Users/yaohan/vscode/SFML\ GAMES/Game\ 2/Game.cpp
 CMakeFiles/Game2.dir/Game.cpp.o: CMakeFiles/Game2.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/yaohan/vscode/SFML GAMES/Game 2/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Game2.dir/Game.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/yaohan/vscode/SFML GAMES/Game 2/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Game2.dir/Game.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Game2.dir/Game.cpp.o -MF CMakeFiles/Game2.dir/Game.cpp.o.d -o CMakeFiles/Game2.dir/Game.cpp.o -c "/Users/yaohan/vscode/SFML GAMES/Game 2/Game.cpp"
 
 CMakeFiles/Game2.dir/Game.cpp.i: cmake_force
@@ -125,20 +111,34 @@ CMakeFiles/Game2.dir/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Game2.dir/Game.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/yaohan/vscode/SFML GAMES/Game 2/Game.cpp" -o CMakeFiles/Game2.dir/Game.cpp.s
 
+CMakeFiles/Game2.dir/Player.cpp.o: CMakeFiles/Game2.dir/flags.make
+CMakeFiles/Game2.dir/Player.cpp.o: /Users/yaohan/vscode/SFML\ GAMES/Game\ 2/Player.cpp
+CMakeFiles/Game2.dir/Player.cpp.o: CMakeFiles/Game2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/yaohan/vscode/SFML GAMES/Game 2/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Game2.dir/Player.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Game2.dir/Player.cpp.o -MF CMakeFiles/Game2.dir/Player.cpp.o.d -o CMakeFiles/Game2.dir/Player.cpp.o -c "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp"
+
+CMakeFiles/Game2.dir/Player.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Game2.dir/Player.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp" > CMakeFiles/Game2.dir/Player.cpp.i
+
+CMakeFiles/Game2.dir/Player.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Game2.dir/Player.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/yaohan/vscode/SFML GAMES/Game 2/Player.cpp" -o CMakeFiles/Game2.dir/Player.cpp.s
+
 # Object files for target Game2
 Game2_OBJECTS = \
 "CMakeFiles/Game2.dir/main.cpp.o" \
 "CMakeFiles/Game2.dir/Balls.cpp.o" \
-"CMakeFiles/Game2.dir/Player.cpp.o" \
-"CMakeFiles/Game2.dir/Game.cpp.o"
+"CMakeFiles/Game2.dir/Game.cpp.o" \
+"CMakeFiles/Game2.dir/Player.cpp.o"
 
 # External object files for target Game2
 Game2_EXTERNAL_OBJECTS =
 
 Game2: CMakeFiles/Game2.dir/main.cpp.o
 Game2: CMakeFiles/Game2.dir/Balls.cpp.o
-Game2: CMakeFiles/Game2.dir/Player.cpp.o
 Game2: CMakeFiles/Game2.dir/Game.cpp.o
+Game2: CMakeFiles/Game2.dir/Player.cpp.o
 Game2: CMakeFiles/Game2.dir/build.make
 Game2: /opt/homebrew/Cellar/sfml/2.5.1_2/lib/libsfml-graphics.2.5.1.dylib
 Game2: /opt/homebrew/Cellar/sfml/2.5.1_2/lib/libsfml-window.2.5.1.dylib

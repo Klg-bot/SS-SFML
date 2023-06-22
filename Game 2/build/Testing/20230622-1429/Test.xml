@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Site BuildName="Darwin-clang++"
-	BuildStamp="20230622-0201-Experimental"
+	BuildStamp="20230622-1429-Experimental"
 	Name="Soons-MacBook-Air.local"
 	Generator="ctest-3.25.1"
 	CompilerName="/usr/bin/clang++"
@@ -24,11 +24,11 @@
 	ProcessorClockFrequency="0"
 	>
 	<Testing>
-		<StartDateTime>Jun 22 16:52 +08</StartDateTime>
-		<StartTestTime>1687423962</StartTestTime>
+		<StartDateTime>Jun 22 22:33 +08</StartDateTime>
+		<StartTestTime>1687444404</StartTestTime>
 		<TestList/>
-		<EndDateTime>Jun 22 16:52 +08</EndDateTime>
-		<EndTestTime>1687423962</EndTestTime>
+		<EndDateTime>Jun 22 22:33 +08</EndDateTime>
+		<EndTestTime>1687444404</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

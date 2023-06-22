@@ -731,6 +731,7 @@ CMakeFiles/Game2.dir/Game.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/_types/_nl_item.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/sstream \
   /Users/yaohan/vscode/SFML\ GAMES/Game\ 2/Player.h \
   /opt/homebrew/Cellar/sfml/2.5.1_2/include/SFML/Graphics.hpp \
   /opt/homebrew/Cellar/sfml/2.5.1_2/include/SFML/Window.hpp \

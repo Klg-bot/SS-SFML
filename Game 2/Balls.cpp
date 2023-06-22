@@ -13,12 +13,12 @@ void Balls::initShape(const sf::RenderWindow& window)
 	case DAMAGING:
 		color = sf::Color::Red;
 		this->shape.setOutlineColor(sf::Color::White);
-		this->shape.setOutlineThickness(2.f);
+		this->shape.setOutlineThickness(5.f);
 		break;
 	case HEALING:
 		color = sf::Color::Green;
 		this->shape.setOutlineColor(sf::Color::White);
-		this->shape.setOutlineThickness(2.f);
+		this->shape.setOutlineThickness(5.f);
 		break;
 
 	}

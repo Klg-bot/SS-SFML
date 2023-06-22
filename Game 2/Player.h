@@ -12,9 +12,6 @@ private:
     sf::RectangleShape shape;
 
     float movementSpeed;
-    int hp;
-    int hpMax;
-
 
     void initVariables();
     void initShape();
@@ -25,12 +22,11 @@ public:
 
     //Accesors
     const sf::RectangleShape getShape() const;
-    const int& getHp() const;
-    const int& getHpMax() const;
+    const sf::Vector2f& getSize() const;
+
 
     //Functions
-    void takeDamage(const int damage);
-    void gainHealth(const int health);
+    void gainSize(float sizeGained);
 
     void updateInput();
     void updateWindowsBoundsCollision(const sf::RenderTarget* target);

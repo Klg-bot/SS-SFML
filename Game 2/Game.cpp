@@ -12,15 +12,15 @@ void Game::initVariable()
 
 void Game::initWindow()
 {
-    this->videoMode = sf::VideoMode(800, 600);
-    this->window = new sf::RenderWindow(this->videoMode, "Game 2", sf::Style::Close | sf::Style::Titlebar);
+    // this->videoMode = sf::VideoMode(800, 600);
+    this->window = new sf::RenderWindow(this->videoMode, "Game 2", sf::Style::Fullscreen | sf::Style::Titlebar);
     this->window->setFramerateLimit(60);
 
 }
 
 void Game::initFonts()
 {
-    if (this->font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
+    if (!this->font.loadFromFile("Fonts/ARCADECLASSIC.TTF"))
     {
         std::cout << "Could not load fonts" << "\n";
     }
@@ -31,7 +31,7 @@ void Game::initText()
     //Gui init
     this->guiText.setFont(this->font);
     this->guiText.setFillColor(sf::Color::White);
-    this->guiText.setCharacterSize(24);
+    this->guiText.setCharacterSize(56);
 
     //End game text init
     this->endGameText.setFont(this->font);
@@ -39,7 +39,7 @@ void Game::initText()
     this->endGameText.setCharacterSize(60);
     this->endGameText.setStyle(sf::Text::Bold);
     this->endGameText.setPosition(400.f, 300.f);
-    this->endGameText.setString("YOU ARE DEAD");
+    this->endGameText.setString("YOU DIED");
   
 }
 
@@ -92,11 +92,11 @@ void Game::pollEvents()
 const int Game::randBallType() const
 {
     int type = BallTypes::DEFAULT;
-    int randValue = rand() % 101 + 1;
+    int randValue = rand() % 100 + 1;
 
-    if (50 < randValue <= 60)
+    if (randValue > 50 && randValue <= 75)
         type = BallTypes::DAMAGING;
-    else if (60 < randValue <= 100)
+    else if (randValue > 75 && randValue <= 100)
         type = BallTypes::HEALING;
 
     return type;
@@ -113,7 +113,7 @@ void Game::spawnBalls()
     {
         if (this->balls.size() < this->maxBalls)
         {
-            this->balls.push_back(Balls(*this->window, rand()%BallTypes::NROTYPES));
+            this->balls.push_back(Balls(*this->window, this->randBallType()));
 
             this->spawnTimer = 0.f;
         }
@@ -124,7 +124,7 @@ void Game::updatePlayer()
 {
     this->player.update(this->window);
 
-    if (this->player.getHp() <= 0)
+    if (this->player.getSize().x <= 0 && this->player.getSize().x <= 0)
         this->endGame = true;
 
 }
@@ -141,12 +141,14 @@ void Game::updateCollision()
             {
             case BallTypes::DEFAULT:
                 this->points++;
+                this->player.gainSize(10.f);
                 break;
             case BallTypes::DAMAGING:
-                this->player.takeDamage(9);
+                this->player.gainSize(-200.f);
                 break;
             case BallTypes::HEALING:
-                this->player.gainHealth(1);
+                this->points++;
+                this->player.gainSize(20.f);
                 break;
             }
 
@@ -165,7 +167,7 @@ void Game::updateGui()
     std::stringstream ss;
     
     ss << "     " << this->points << "     Points" << "\n"
-        << "     " << this->player.getHp() << " / " << this->player.getHpMax() << "     Health" << "\n";
+        << "     " << this->player.getSize().x << "     Health" << "\n";
 
     this->guiText.setString(ss.str());
 }

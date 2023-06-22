@@ -2,10 +2,7 @@
 
 void Player::initVariables()
 {
-    this->movementSpeed = 11.f;
-    this->hpMax = 10;
-    this->hp = hpMax;
-    
+    this->movementSpeed = 20.f;
 }
 
 void Player::initShape()
@@ -33,34 +30,17 @@ const sf::RectangleShape Player::getShape() const
     return this->shape;
 }
 
-const int& Player::getHp() const
+const sf::Vector2f &Player::getSize() const
 {
-    return this->hp;
-}
-
-const int& Player::getHpMax() const
-{
-    return this->hpMax;
+    return this->shape.getSize();
 }
 
 //Functions
-void Player::takeDamage(const int damage)
+void Player::gainSize(float sizeGained)
 {
-    if (this->hp > 0)
-        this->hp -= damage;
-
-    if (this->hp < 0)
-        this->hp = 0;
-}
-
-void Player::gainHealth(const int health)
-{
-    if (this->hp < this->hpMax)
-        this->hp += health;
-
-    if (this->hp > this->hpMax)
-        this->hp = this->hpMax;
-
+    sf::Vector2f theSize = this->shape.getSize();
+    if(theSize.x > 15.f && theSize.y > 15.f)
+        this->shape.setSize(theSize + sf::Vector2f(sizeGained, sizeGained));
 }
 
 void Player::updateInput()

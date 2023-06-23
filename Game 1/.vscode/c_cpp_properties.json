@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "/opt/homebrew/Cellar/sfml/2.5.1_2/include"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/opt/homebrew/Cellar/sfml/2.5.1_2/lib"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "intelliSenseMode": "macos-clang-arm64",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}

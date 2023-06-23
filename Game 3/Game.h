@@ -1,28 +1,30 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
+#include "Player.h"
+ 
 
 class Game
 {
 private:
-
-    //Window
+    //Variables
     sf::RenderWindow * window;
+    sf::Event ev;
 
-    //Private Functions
+    //Player
+    Player * player;
+
+    //Private functions
     void initWindow();
+    void initPlayer();
 
 public:
-    //Constructors Destructors
     Game();
-    ~Game();
+    virtual ~Game();
 
     void pollEvents();
+    void updateInput();
 
-    //Update render
+    void run();
+    void update();
     void render();
-    void update();  
-    
 };

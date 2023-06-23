@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/opt/homebrew/Cellar/cmake/3.25.1/bin/cmake" "/Users/yaohan/vscode/SFML GAMES/Game 1"
+ConfigureCommand: "/opt/homebrew/Cellar/cmake/3.26.4/bin/cmake" "/Users/yaohan/vscode/SFML GAMES/Game 1"
 MakeCommand: /opt/homebrew/Cellar/cmake/3.25.1/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}" -- -i
 DefaultCTestConfigurationType: Release
 

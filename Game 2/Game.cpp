@@ -141,10 +141,9 @@ void Game::updateCollision()
             {
             case BallTypes::DEFAULT:
                 this->points++;
-                this->player.gainSize(10.f);
                 break;
             case BallTypes::DAMAGING:
-                this->player.gainSize(-200.f);
+                this->player.gainSize(-20.f);
                 break;
             case BallTypes::HEALING:
                 this->points++;

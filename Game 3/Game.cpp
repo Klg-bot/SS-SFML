@@ -23,6 +23,8 @@ void Game::initTextures()
     this->textures["BULLET"] = new sf::Texture();
 	this->textures["BULLET"]->loadFromFile("Images/bullet.png");
 
+    this->textures["BACK"] = new sf::Texture();
+	this->textures["BACK"]->loadFromFile("Images/Background.png");
 }
 
 void Game::initGUI()
@@ -54,6 +56,15 @@ void Game::initGUI()
 	this->myPointsText.setCharacterSize(52);
 	this->myPointsText.setFillColor(sf::Color::White);
 
+    //Init endGameText
+    this->endGameText.setPosition(this->window->getSize().x/2 - 160.f, this->window->getSize().y/2);
+	this->endGameText.setFont(this->font);
+	this->endGameText.setCharacterSize(100);
+	this->endGameText.setFillColor(sf::Color::Red);
+    this->endGameText.setStyle(sf::Text::Bold);
+    this->endGameText.setOutlineThickness(3.f);
+    this->endGameText.setOutlineColor(sf::Color::Red);
+
     //Hp bar
 	this->hpBarFront.setSize(sf::Vector2f(300.f, 25.f));
 	this->hpBarFront.setFillColor(sf::Color::Red);
@@ -68,12 +79,12 @@ void Game::initGUI()
 
 void Game::initBackground()
 {
-    if(!this->worldBackgroundTex.loadFromFile("Images/Background.png"))
-    {
-        std::cout << "Couldn't load background" << std::endl;
-    }
+    // if(!this->worldBackgroundTex.loadFromFile("Images/Background.png"))
+    // {
+    //     std::cout << "Couldn't load background" << std::endl;
+    // }
 
-    this->worldBackground.setTexture(this->worldBackgroundTex);
+    this->worldBackground.setTexture(*this->textures["BACK"]);
     // this->worldBackground.setPosition(1000, 1000);
     this->worldBackground.scale(12.f, 12.f);
 }
@@ -82,10 +93,10 @@ void Game::initBackground()
 Game::Game()
 {
     this->initWindow();
+    this->initTextures();
     this->initBackground();
     this->initPlayer();
     this->initEnemies();
-    this->initTextures();
     this->initGUI();
 }
 
@@ -242,7 +253,8 @@ void Game::updateCombat()
         //Enemy player collision
         if(this->enemies[i]->getBounds().intersects(this->player->getBounds()))
         {
-            this->player->takeDamage(10);
+            this->player->takeDamage(this->enemies[i]->getPoints());
+            std::cout << this->enemies[i]->getPoints() << std::endl;
 
             delete this->enemies[i];
             this->enemies.erase(this->enemies.begin() + i);
@@ -291,9 +303,9 @@ void Game::update()
 
 void Game::renderGUI()
 {
-    this->window->draw(this->bulletVector);
-    this->window->draw(this->getHp);
-    this->window->draw(this->mousePos);
+    // this->window->draw(this->bulletVector);
+    // this->window->draw(this->getHp);
+    // this->window->draw(this->mousePos);
     this->window->draw(this->myPointsText);
     this->window->draw(this->hpBarBack);
 	this->window->draw(this->hpBarFront);
@@ -305,13 +317,24 @@ void Game::renderWorld()
     this->window->draw(this->worldBackground);
 }
 
+void Game::renderEndGame()
+{
+    //endGameText
+    std::stringstream ss5;
+    ss5 << "GAME OVER";
+    this->endGameText.setString(ss5.str());
+
+    this->window->draw(this->endGameText);
+}
+
 void Game::run()
 {
 	while (this->window->isOpen())
 	{
 		this->pollEvents();
 
-		this->update();
+        if(this->player->getHp() > 0)
+		    this->update();
 
 		this->render();
 	}
@@ -338,6 +361,11 @@ void Game::render()
 	}
 
     this->renderGUI();
+
+    if(this->player->getHp() <= 0)
+    {
+        this->renderEndGame();
+    }
 
     this->window->display();
 }

@@ -27,6 +27,7 @@ private:
 	sf::Text mousePos;
 	sf::Text getHp;
 	sf::Text myPointsText;
+    sf::Text endGameText;
     sf::RectangleShape hpBarFront;
     sf::RectangleShape hpBarBack;
 
@@ -80,6 +81,7 @@ public:
     void renderGUI();
     void renderWorld();
 
+    void renderEndGame();
 
     void update();
     void render();

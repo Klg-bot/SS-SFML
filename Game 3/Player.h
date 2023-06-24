@@ -30,7 +30,14 @@ public:
     //Accessors
     sf::Vector2f getPos();
     sf::FloatRect getBounds();
+    int getHp();
+    int getHpMax();
 
+
+    //Functions
+
+    void takeDamage(const int damage);
+    void gainHealth(const int healing);
 
     void move(const float dirX, const float dirY);
     void setPosition(const float x, const float y);

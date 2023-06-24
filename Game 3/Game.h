@@ -18,9 +18,21 @@ private:
     sf::RenderWindow * window;
     sf::Event ev;
 
-    //Fonts
+    //Points
+    int points;
+
+    //GUI
     sf::Font font;
-	sf::Text pointText;
+	sf::Text bulletVector;
+	sf::Text mousePos;
+	sf::Text getHp;
+	sf::Text myPointsText;
+    sf::RectangleShape hpBarFront;
+    sf::RectangleShape hpBarBack;
+
+    //Background
+    sf::Sprite worldBackground;
+    sf::Texture worldBackgroundTex;
 
     //Textures
     std::map<std::string, sf::Texture*> textures;
@@ -45,10 +57,16 @@ private:
     void initTextures();
     void initGUI();
 
+    void initBackground();
+
+
 public:
     //Const Dest
     Game();
     virtual ~Game();
+
+    //Accessors
+    int getPoints();
 
     //Functions
     void pollEvents();
@@ -60,6 +78,7 @@ public:
 
     void updateGUI();
     void renderGUI();
+    void renderWorld();
 
 
     void update();

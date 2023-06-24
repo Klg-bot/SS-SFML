@@ -2,7 +2,7 @@
 
 void Player::initVariables()
 {
-    this->movementSpeed = 80.f;
+    this->movementSpeed = 20.f;
 
     this->hpMax = 100;
 	this->hp = this->hpMax;
@@ -16,7 +16,7 @@ void Player::initSprite()
     sprite.setPosition(400, 300);
 
 	//Resize the sprite
-	this->sprite.scale(0.1f, 0.1f);
+	this->sprite.scale(0.15f, 0.15f);
 }
 
 void Player::initTexture()
@@ -47,6 +47,26 @@ sf::Vector2f Player::getPos()
 sf::FloatRect Player::getBounds()
 {
     return this->sprite.getGlobalBounds();
+}
+
+int Player::getHp()
+{
+    return this->hp;
+}
+
+int Player::getHpMax()
+{
+    return this->hpMax;
+}
+
+void Player::takeDamage(const int damage)
+{
+    this->hp -= damage;
+}
+
+void Player::gainHealth(const int healing)
+{
+    this->hp += healing;
 }
 
 void Player::move(const float dirX, const float dirY)

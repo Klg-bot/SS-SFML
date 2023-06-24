@@ -4,7 +4,7 @@
 void Game::initWindow()
 {
     this->window = new sf::RenderWindow(sf::VideoMode(1600, 1000), "Game 3", sf::Style::Fullscreen | sf::Style::Titlebar);
-    this->window->setFramerateLimit(60);
+    this->window->setFramerateLimit(144);
 }
 
 void Game::initPlayer()
@@ -14,7 +14,7 @@ void Game::initPlayer()
 
 void Game::initEnemies()
 {
-    this->spawnTimerMax = 50.f;
+    this->spawnTimerMax = 5.f;
 	this->spawnTimer = this->spawnTimerMax;
 }
 
@@ -22,6 +22,7 @@ void Game::initTextures()
 {
     this->textures["BULLET"] = new sf::Texture();
 	this->textures["BULLET"]->loadFromFile("Images/bullet.png");
+
 }
 
 void Game::initGUI()
@@ -29,18 +30,59 @@ void Game::initGUI()
     if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
 		std::cout << "ERROR::GAME::Failed to load font" << "\n";
     
-    //Init point text
-	this->pointText.setPosition(700.f, 25.f);
-	this->pointText.setFont(this->font);
-	this->pointText.setCharacterSize(52);
-	this->pointText.setFillColor(sf::Color::White);
-	this->pointText.setString("test");
+    //Init bulletVector
+	this->bulletVector.setPosition(700.f, 25.f);
+	this->bulletVector.setFont(this->font);
+	this->bulletVector.setCharacterSize(52);
+	this->bulletVector.setFillColor(sf::Color::White);
+
+    //Init getHp
+	this->getHp.setPosition(700.f, 185.f);
+	this->getHp.setFont(this->font);
+	this->getHp.setCharacterSize(52);
+	this->getHp.setFillColor(sf::Color::White);
+
+    //Init mousePos
+	this->mousePos.setPosition(700.f, 105.f);
+	this->mousePos.setFont(this->font);
+	this->mousePos.setCharacterSize(52);
+	this->mousePos.setFillColor(sf::Color::White);
+
+    //Init myPointsText
+	this->myPointsText.setPosition(0.f, 50.f);
+	this->myPointsText.setFont(this->font);
+	this->myPointsText.setCharacterSize(52);
+	this->myPointsText.setFillColor(sf::Color::White);
+
+    //Hp bar
+	this->hpBarFront.setSize(sf::Vector2f(300.f, 25.f));
+	this->hpBarFront.setFillColor(sf::Color::Red);
+	this->hpBarFront.setPosition(sf::Vector2f(20.f, 20.f));
+
+    this->hpBarBack = this->hpBarFront;
+    this->hpBarBack.setFillColor(sf::Color(25, 25, 25, 200));
+    this->hpBarBack.setOutlineThickness(3.f);
+    this->hpBarBack.setOutlineColor(sf::Color::White);
+
+}
+
+void Game::initBackground()
+{
+    if(!this->worldBackgroundTex.loadFromFile("Images/Background.png"))
+    {
+        std::cout << "Couldn't load background" << std::endl;
+    }
+
+    this->worldBackground.setTexture(this->worldBackgroundTex);
+    // this->worldBackground.setPosition(1000, 1000);
+    this->worldBackground.scale(12.f, 12.f);
 }
 
 //Const Dest
 Game::Game()
 {
     this->initWindow();
+    this->initBackground();
     this->initPlayer();
     this->initEnemies();
     this->initTextures();
@@ -70,6 +112,11 @@ Game::~Game()
 		delete i;
 	}
 
+}
+
+int Game::getPoints()
+{
+    return this->points;
 }
 
 void Game::pollEvents()
@@ -103,7 +150,8 @@ void Game::updateInput()
 			this->player->getPos().y, 
 			0.f, 
 			-1.f, 
-			2.f
+			10.f,
+            1.f
             )
         );
     }
@@ -139,7 +187,6 @@ void Game::updateEnemies()
 
 void Game::updateBullets()
 {
-    std::vector<int> bulletsToDelete;
 
     for (auto i = 0; i < this->bullets.size(); i++)
     {
@@ -148,15 +195,11 @@ void Game::updateBullets()
         //Bullet culling (top of screen)
         if (this->bullets[i]->getBounds().top + this->bullets[i]->getBounds().height < 0.f)
         {
-            bulletsToDelete.push_back(i);
+            delete this->bullets[i];
+            this->bullets.erase(this->bullets.begin() + i);
         }
     }
 
-    for(auto i = bulletsToDelete.rbegin(); i != bulletsToDelete.rend(); ++i)
-    {
-        delete this->bullets[*i];
-        this->bullets.erase(this->bullets.begin() + *i);
-    }
 }
 
 void Game::updateBounds()
@@ -176,32 +219,63 @@ void Game::updateBounds()
 }
 
 void Game::updateCombat()
-{
+{   
+    //Bullet enemy collision
     for (size_t i = 0; i < this->enemies.size(); i++)
-    {
+    {   
+        //Bullet enemy collision
         bool enemyDeleted = false;
-        for (size_t k = 0; k < this->bullets.size() && enemyDeleted = false; k++)
+        for (size_t k = 0; k < this->bullets.size() && enemyDeleted == false; k++)
         {
 			if (this->enemies[i]->getBounds().intersects(this->bullets[k]->getBounds()))
 			{
 				delete this->enemies[i];
 				this->enemies.erase(this->enemies.begin() + i);
 
-                
+                delete this->bullets[k];
+                this->bullets.erase(this->bullets.begin() + k);
+
+                this->points += this->enemies[i]->getPoints();
+                // std::cout << this->enemies[i]->getPoints() << std::endl;
             }
         }
-        
+        //Enemy player collision
+        if(this->enemies[i]->getBounds().intersects(this->player->getBounds()))
+        {
+            this->player->takeDamage(10);
+
+            delete this->enemies[i];
+            this->enemies.erase(this->enemies.begin() + i);
+        }
     }
-    
 }
 
 void Game::updateGUI()
 {
-    std::stringstream ss;
+    //bulletVector
+    std::stringstream ss1;
+	ss1 << "bulletVector: " << this->bullets.size();
+	this->bulletVector.setString(ss1.str());
 
-	ss << "Bullet-vector: " << this->bullets.size();;
+    //getHp
+    std::stringstream ss2;
+	ss2 << "Health: " << this->player->getHp();
+	this->getHp.setString(ss2.str());
 
-	this->pointText.setString(ss.str());
+    //mousePos
+    std::stringstream ss3;
+	ss3 << "Mouse pos: " << sf::Mouse::getPosition(*this->window).x << " , " << sf::Mouse::getPosition(*this->window).y;
+	this->mousePos.setString(ss3.str());
+
+    //myPointsText
+    std::stringstream ss4;
+	ss4 << "Points: " << this->getPoints();
+	this->myPointsText.setString(ss4.str());
+
+    //Update player GUI
+	float hpPercent = static_cast<float>(this->player->getHp()) / this->player->getHpMax();
+	this->hpBarFront.setSize(sf::Vector2f(300.f * hpPercent, this->hpBarFront.getSize().y));
+
 }
 
 void Game::update()
@@ -212,11 +286,23 @@ void Game::update()
     this->updateBullets();
     this->updateGUI();
     this->updateBounds();
+    this->updateCombat();
 }
 
 void Game::renderGUI()
 {
-    this->window->draw(this->pointText);
+    this->window->draw(this->bulletVector);
+    this->window->draw(this->getHp);
+    this->window->draw(this->mousePos);
+    this->window->draw(this->myPointsText);
+    this->window->draw(this->hpBarBack);
+	this->window->draw(this->hpBarFront);
+
+}
+
+void Game::renderWorld()
+{
+    this->window->draw(this->worldBackground);
 }
 
 void Game::run()
@@ -235,6 +321,8 @@ void Game::run()
 void Game::render()
 {
     this->window->clear();
+
+    this->renderWorld();
 
     //Draw game
     this->player->render(*this->window);

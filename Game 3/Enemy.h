@@ -26,6 +26,8 @@ public:
 
 	//Accessors
 	const sf::FloatRect getBounds() const;
+    int getPoints();
+
 
     void update();
     void render(sf::RenderTarget* target);

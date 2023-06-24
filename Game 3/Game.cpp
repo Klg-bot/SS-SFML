@@ -3,7 +3,7 @@
 //Initialize 
 void Game::initWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Game 3", sf::Style::Fullscreen | sf::Style::Titlebar);
+    this->window = new sf::RenderWindow(sf::VideoMode(1600, 1000), "Game 3", sf::Style::Close | sf::Style::Titlebar);
     this->window->setFramerateLimit(60);
 }
 
@@ -18,7 +18,24 @@ void Game::initEnemies()
 	this->spawnTimer = this->spawnTimerMax;
 }
 
+void Game::initTextures()
+{
+    this->textures["BULLET"] = new sf::Texture();
+	this->textures["BULLET"]->loadFromFile("Images/bullet.png");
+}
 
+void Game::initGUI()
+{
+    if (!this->font.loadFromFile("Fonts/PixellettersFull.ttf"))
+		std::cout << "ERROR::GAME::Failed to load font" << "\n";
+    
+    //Init point text
+	this->pointText.setPosition(700.f, 25.f);
+	this->pointText.setFont(this->font);
+	this->pointText.setCharacterSize(52);
+	this->pointText.setFillColor(sf::Color::White);
+	this->pointText.setString("test");
+}
 
 //Const Dest
 Game::Game()
@@ -26,12 +43,33 @@ Game::Game()
     this->initWindow();
     this->initPlayer();
     this->initEnemies();
+    this->initTextures();
+    this->initGUI();
 }
 
 Game::~Game()
 {
     delete this->window;
     delete this->player;
+
+    //Delete textures
+	for (auto &i : this->textures)
+	{
+		delete i.second;
+	}
+
+    //Delete bullets
+	for (auto *i : this->bullets)
+	{
+		delete i;
+	}
+
+	//Delete enemies
+	for (auto *i : this->enemies)
+	{
+		delete i;
+	}
+
 }
 
 void Game::pollEvents()
@@ -54,6 +92,21 @@ void Game::updateInput()
         this->player->move(0.f, -1.f);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         this->player->move(0.f, 1.f);
+    
+    //Shoot
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        this->bullets.push_back(
+            new Bullet(
+            this->textures["BULLET"], 
+			this->player->getPos().x + this->player->getBounds().width/2.f, 
+			this->player->getPos().y, 
+			0.f, 
+			-1.f, 
+			5.f
+            )
+        );
+    }
 }
 
 void Game::updateEnemies()
@@ -84,7 +137,43 @@ void Game::updateEnemies()
 	}
 }
 
-//Functions
+void Game::updateBullets()
+{
+    std::vector<int> bulletsToDelete;
+
+    for (auto i = 0; i < this->bullets.size(); i++)
+    {
+        this->bullets[i]->update();
+
+        //Bullet culling (top of screen)
+        if (this->bullets[i]->getBounds().top + this->bullets[i]->getBounds().height < 0.f)
+        {
+            bulletsToDelete.push_back(i);
+        }
+    }
+
+    for(auto i = bulletsToDelete.rbegin(); i != bulletsToDelete.rend(); ++i)
+    {
+        delete this->bullets[*i];
+        this->bullets.erase(this->bullets.begin() + *i);
+    }
+}
+
+
+void Game::updateGUI()
+{
+    std::stringstream ss;
+
+	ss << "Bullet-vector: " << this->bullets.size();;
+
+	this->pointText.setString(ss.str());
+}
+
+void Game::renderGUI()
+{
+    this->window->draw(this->pointText);
+}
+
 void Game::run()
 {
 	while (this->window->isOpen())
@@ -103,6 +192,8 @@ void Game::update()
     this->updateInput();
     this->player->update();
     this->updateEnemies();
+    this->updateBullets();
+    this->updateGUI();
 }
 
 void Game::render()
@@ -112,10 +203,17 @@ void Game::render()
     //Draw game
     this->player->render(*this->window);
 
+	for (auto *bullet : this->bullets)
+	{
+		bullet->render(*this->window);
+	}
+
     for (auto *enemy : this->enemies)
 	{
 		enemy->render(this->window);
 	}
+
+    this->renderGUI();
 
     this->window->display();
 }

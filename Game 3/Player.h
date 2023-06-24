@@ -23,8 +23,14 @@ private:
     void initTexture();
     
 public:
+    //Const Dest
     Player();
     ~Player();
+
+    //Accessors
+    sf::Vector2f getPos();
+    sf::FloatRect getBounds();
+
 
     void move(const float dirX, const float dirY);
 

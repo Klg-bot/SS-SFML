@@ -39,6 +39,16 @@ Player::~Player()
 {
 }
 
+sf::Vector2f Player::getPos()
+{
+    return this->sprite.getPosition();
+}
+
+sf::FloatRect Player::getBounds()
+{
+    return this->sprite.getGlobalBounds();
+}
+
 void Player::move(const float dirX, const float dirY)
 {
     this->sprite.move(this->movementSpeed * dirX, this->movementSpeed * dirY);
@@ -53,3 +63,4 @@ void Player::render(sf::RenderTarget& target)
 {
 	target.draw(this->sprite);
 }
+

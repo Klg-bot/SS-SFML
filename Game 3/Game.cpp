@@ -14,8 +14,11 @@ void Game::initPlayer()
 
 void Game::initEnemies()
 {
-    this->enemy = new Enemy();
+    this->spawnTimerMax = 50.f;
+	this->spawnTimer = this->spawnTimerMax;
 }
+
+
 
 //Const Dest
 Game::Game()
@@ -29,7 +32,6 @@ Game::~Game()
 {
     delete this->window;
     delete this->player;
-    delete this->enemy;
 }
 
 void Game::pollEvents()
@@ -54,6 +56,34 @@ void Game::updateInput()
         this->player->move(0.f, 1.f);
 }
 
+void Game::updateEnemies()
+{
+    //Spawning
+	this->spawnTimer += 0.5f;
+	if (this->spawnTimer >= this->spawnTimerMax)
+	{
+		this->enemies.push_back(new Enemy(rand() % this->window->getSize().x-20.f, -100.f));
+		this->spawnTimer = 0.f;
+	}
+
+    //Update
+	unsigned counter = 0;
+	for (auto *enemy : this->enemies)
+	{
+		enemy->update();
+
+		//Bullet culling (top of screen)
+		if (enemy->getBounds().top > this->window->getSize().y)
+		{
+			//Delete enemy
+			delete this->enemies.at(counter);
+			this->enemies.erase(this->enemies.begin() + counter);
+		}
+        
+		++counter;
+	}
+}
+
 //Functions
 void Game::run()
 {
@@ -71,6 +101,8 @@ void Game::run()
 void Game::update()
 {
     this->updateInput();
+    this->player->update();
+    this->updateEnemies();
 }
 
 void Game::render()
@@ -79,7 +111,11 @@ void Game::render()
 
     //Draw game
     this->player->render(*this->window);
-    this->enemy->render(this->window);
+
+    for (auto *enemy : this->enemies)
+	{
+		enemy->render(this->window);
+	}
 
     this->window->display();
 }

@@ -21,9 +21,11 @@ private:
     
 public:
     //Const Dest
-    Enemy();
+    Enemy(float pos_x, float pos_y);
     ~Enemy();
 
+	//Accessors
+	const sf::FloatRect getBounds() const;
 
     void update();
     void render(sf::RenderTarget* target);

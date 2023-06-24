@@ -15,8 +15,11 @@ private:
 
     //Player
     Player * player;
-    
-    Enemy * enemy;
+
+    //Enemies
+	float spawnTimer;
+	float spawnTimerMax;
+	std::vector<Enemy*> enemies;
 
     //Private functions
     void initWindow();
@@ -25,13 +28,19 @@ private:
     void initEnemies();
 
 public:
+    //Const Dest
     Game();
     virtual ~Game();
 
+    //Functions
+
     void pollEvents();
     void updateInput();
+    void updateEnemies();
 
-    void run();
+
     void update();
     void render();
+
+    void run();
 };

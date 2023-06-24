@@ -254,7 +254,7 @@ void Game::updateCombat()
         if(this->enemies[i]->getBounds().intersects(this->player->getBounds()))
         {
             this->player->takeDamage(this->enemies[i]->getPoints());
-            std::cout << this->enemies[i]->getPoints() << std::endl;
+            // std::cout << this->enemies[i]->getPoints() << std::endl;
 
             delete this->enemies[i];
             this->enemies.erase(this->enemies.begin() + i);

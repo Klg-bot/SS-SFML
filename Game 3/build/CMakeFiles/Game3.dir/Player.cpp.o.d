@@ -1,6 +1,5 @@
-CMakeFiles/Game3.dir/Game.cpp.o: \
-  /Users/yaohan/vscode/SFML\ GAMES/Game\ 3/Game.cpp \
-  /Users/yaohan/vscode/SFML\ GAMES/Game\ 3/Game.h \
+CMakeFiles/Game3.dir/Player.cpp.o: \
+  /Users/yaohan/vscode/SFML\ GAMES/Game\ 3/Player.cpp \
   /Users/yaohan/vscode/SFML\ GAMES/Game\ 3/Player.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk/usr/include/c++/v1/__assert \

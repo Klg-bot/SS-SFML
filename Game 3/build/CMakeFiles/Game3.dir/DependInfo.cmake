@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/yaohan/vscode/SFML GAMES/Game 3/Game.cpp" "CMakeFiles/Game3.dir/Game.cpp.o" "gcc" "CMakeFiles/Game3.dir/Game.cpp.o.d"
+  "/Users/yaohan/vscode/SFML GAMES/Game 3/Player.cpp" "CMakeFiles/Game3.dir/Player.cpp.o" "gcc" "CMakeFiles/Game3.dir/Player.cpp.o.d"
   "/Users/yaohan/vscode/SFML GAMES/Game 3/main.cpp" "CMakeFiles/Game3.dir/main.cpp.o" "gcc" "CMakeFiles/Game3.dir/main.cpp.o.d"
   )
 

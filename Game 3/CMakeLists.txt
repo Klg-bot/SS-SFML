@@ -4,7 +4,7 @@ project(Game3 VERSION 0.1.0 LANGUAGES C CXX)
 include(CTest)
 enable_testing()
 
-add_executable(Game3 main.cpp Game.cpp)
+add_executable(Game3 main.cpp Game.cpp Player.cpp)
 target_link_libraries(Game3 sfml-graphics sfml-system)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

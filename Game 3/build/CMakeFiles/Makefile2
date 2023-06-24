@@ -837,12 +837,12 @@ CMakeFiles/ContinuousSubmit.dir/clean:
 CMakeFiles/Game3.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game3.dir/build.make CMakeFiles/Game3.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game3.dir/build.make CMakeFiles/Game3.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/yaohan/vscode/SFML GAMES/Game 3/build/CMakeFiles" --progress-num=1,2,3 "Built target Game3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/Users/yaohan/vscode/SFML GAMES/Game 3/build/CMakeFiles" --progress-num=1,2,3,4 "Built target Game3"
 .PHONY : CMakeFiles/Game3.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Game3.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/yaohan/vscode/SFML GAMES/Game 3/build/CMakeFiles" 3
+	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/yaohan/vscode/SFML GAMES/Game 3/build/CMakeFiles" 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Game3.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/yaohan/vscode/SFML GAMES/Game 3/build/CMakeFiles" 0
 .PHONY : CMakeFiles/Game3.dir/rule

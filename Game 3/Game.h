@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Player.h"
+#include "Enemy.h"
+
+#include <ctime>
  
 
 class Game
@@ -12,10 +15,14 @@ private:
 
     //Player
     Player * player;
+    
+    Enemy * enemy;
 
     //Private functions
     void initWindow();
+
     void initPlayer();
+    void initEnemies();
 
 public:
     Game();

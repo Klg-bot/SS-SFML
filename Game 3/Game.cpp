@@ -3,7 +3,7 @@
 //Initialize 
 void Game::initWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Game 3", sf::Style::Close | sf::Style::Titlebar);
+    this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Game 3", sf::Style::Fullscreen | sf::Style::Titlebar);
     this->window->setFramerateLimit(60);
 }
 
@@ -12,17 +12,24 @@ void Game::initPlayer()
 	this->player = new Player();
 }
 
+void Game::initEnemies()
+{
+    this->enemy = new Enemy();
+}
+
 //Const Dest
 Game::Game()
 {
     this->initWindow();
     this->initPlayer();
+    this->initEnemies();
 }
 
 Game::~Game()
 {
     delete this->window;
     delete this->player;
+    delete this->enemy;
 }
 
 void Game::pollEvents()
@@ -72,7 +79,7 @@ void Game::render()
 
     //Draw game
     this->player->render(*this->window);
-    std::cout << "rendered sprite" << std::endl;
+    this->enemy->render(this->window);
 
     this->window->display();
 }

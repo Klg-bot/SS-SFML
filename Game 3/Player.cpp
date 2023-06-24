@@ -2,7 +2,7 @@
 
 void Player::initVariables()
 {
-    this->movementSpeed = 2.f;
+    this->movementSpeed = 80.f;
 
     this->hpMax = 100;
 	this->hp = this->hpMax;
@@ -52,6 +52,11 @@ sf::FloatRect Player::getBounds()
 void Player::move(const float dirX, const float dirY)
 {
     this->sprite.move(this->movementSpeed * dirX, this->movementSpeed * dirY);
+}
+
+void Player::setPosition(const float x, const float y)
+{
+    this->sprite.setPosition(x, y);
 }
 
 void Player::update()

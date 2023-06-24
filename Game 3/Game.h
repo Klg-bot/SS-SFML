@@ -51,11 +51,12 @@ public:
     virtual ~Game();
 
     //Functions
-
     void pollEvents();
     void updateInput();
     void updateEnemies();
     void updateBullets();
+    void updateBounds();
+    void updateCombat();
 
     void updateGUI();
     void renderGUI();

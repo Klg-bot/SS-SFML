@@ -3,7 +3,7 @@
 //Initialize 
 void Game::initWindow()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(1600, 1000), "Game 3", sf::Style::Close | sf::Style::Titlebar);
+    this->window = new sf::RenderWindow(sf::VideoMode(1600, 1000), "Game 3", sf::Style::Fullscreen | sf::Style::Titlebar);
     this->window->setFramerateLimit(60);
 }
 
@@ -103,7 +103,7 @@ void Game::updateInput()
 			this->player->getPos().y, 
 			0.f, 
 			-1.f, 
-			5.f
+			2.f
             )
         );
     }
@@ -159,6 +159,41 @@ void Game::updateBullets()
     }
 }
 
+void Game::updateBounds()
+{
+    //Left bound
+    if(this->player->getBounds().left < 0.f)
+        this->player->setPosition(0.f, this->player->getBounds().top);
+    //Right bound
+    if(this->player->getBounds().left + this->player->getBounds().width >= this->window->getSize().x)
+        this->player->setPosition(this->window->getSize().x - this->player->getBounds().width, this->player->getBounds().top);
+    //Top bound
+    if(this->player->getBounds().top < 0.f)
+        this->player->setPosition(this->player->getBounds().left, 0.f);
+    //Bottom bound
+    if(this->player->getBounds().top + this->player->getBounds().height >= this->window->getSize().y)
+        this->player->setPosition(this->player->getBounds().left, this->window->getSize().y - this->player->getBounds().height);
+}
+
+void Game::updateCombat()
+{
+    for (size_t i = 0; i < this->enemies.size(); i++)
+    {
+        bool enemyDeleted = false;
+        for (size_t k = 0; k < this->bullets.size() && enemyDeleted = false; k++)
+        {
+			if (this->enemies[i]->getBounds().intersects(this->bullets[k]->getBounds()))
+			{
+				delete this->enemies[i];
+				this->enemies.erase(this->enemies.begin() + i);
+
+                
+            }
+        }
+        
+    }
+    
+}
 
 void Game::updateGUI()
 {
@@ -167,6 +202,16 @@ void Game::updateGUI()
 	ss << "Bullet-vector: " << this->bullets.size();;
 
 	this->pointText.setString(ss.str());
+}
+
+void Game::update()
+{
+    this->updateInput();
+    this->player->update();
+    this->updateEnemies();
+    this->updateBullets();
+    this->updateGUI();
+    this->updateBounds();
 }
 
 void Game::renderGUI()
@@ -186,15 +231,6 @@ void Game::run()
 	}
 }
 
-//Update render
-void Game::update()
-{
-    this->updateInput();
-    this->player->update();
-    this->updateEnemies();
-    this->updateBullets();
-    this->updateGUI();
-}
 
 void Game::render()
 {

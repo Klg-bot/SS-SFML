@@ -33,6 +33,7 @@ public:
 
 
     void move(const float dirX, const float dirY);
+    void setPosition(const float x, const float y);
 
     void update();
     void render(sf::RenderTarget& target);

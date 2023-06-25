@@ -175,15 +175,14 @@ void Game::update()
 {
     this->pollEvents();
 
-    if (!this->endGame)
-    {
+    if(this->player.getSize().x <= 0)
+        this->endGame = true;
+
     this->updatePlayer();
     this->randBallType();
     this->spawnBalls();
     this->updateCollision();
     this->updateGui();
-
-    }
 
     //Output testing
 

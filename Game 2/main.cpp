@@ -11,7 +11,9 @@ int main()
     //Game loop
     while (game.running())
     {
-        game.update();
+        if(!game.getEndGame())
+            game.update();  
+            
         game.render();
     }
 

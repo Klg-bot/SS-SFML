@@ -39,8 +39,7 @@ const sf::Vector2f &Player::getSize() const
 void Player::gainSize(float sizeGained)
 {
     sf::Vector2f theSize = this->shape.getSize();
-    if(theSize.x > 15.f && theSize.y > 15.f)
-        this->shape.setSize(theSize + sf::Vector2f(sizeGained, sizeGained));
+    this->shape.setSize(theSize + sf::Vector2f(sizeGained, sizeGained));
 }
 
 void Player::updateInput()

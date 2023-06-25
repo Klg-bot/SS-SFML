@@ -1,1 +1,1 @@
-Collection of beginner games
+SFML games
